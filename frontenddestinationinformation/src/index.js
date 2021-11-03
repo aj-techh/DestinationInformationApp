@@ -4,17 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MoralisProvider } from 'react-moralis';
+// import { MoralisProvider } from 'react-moralis';
+
+const load = require('scriptloader');
 
 
-ReactDOM.render(
-  // <MoralisProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-  // </MoralisProvider>,
-  document.getElementById('root')
-);
+load(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places&callback=initMap`, ()=>{
+  ReactDOM.render(
+    // <MoralisProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>,
+    // </MoralisProvider>,
+    document.getElementById('root')
+  );
+});
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
